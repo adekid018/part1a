@@ -33,8 +33,9 @@ const Total=(props)=>{
 }
 /*Step 2 */
 const App=()=> {
-  const course='Half stack application development'
-  const parts=[{
+  const course={
+    name:'Half stack application development',
+    parts:[{
     name:'Fundamentals of React',
     exercises:10
   },
@@ -46,29 +47,33 @@ const App=()=> {
   name:'state of a component',
   exercises:14
   }
-]
+]}
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1>{course}</h1>
+        <h1>{course.name}</h1>
         <p>
-          {parts[0].name} {parts[0].exercises}
+          {course.parts[0].name} {course.parts[0].exercises}
+        </p>
+        
+        <p>
+        {course.parts[1].name} {course.parts[1]['exercises']}
         </p>
         <p>
-        {parts[1].name} {parts[1]['exercises']}
+        {course.parts[2].name} {course.parts[2].exercises}
         </p>
-        <p>
-        {parts[2].name} {parts[2].exercises}
-        </p>
-        <p>Number of exercises {parts[0]['exercises'] + parts[1].exercises + parts[2].exercises}</p>
-        <p>
+        
+        <p>Number of exercises {course.parts[0]['exercises'] + course.parts[1].exercises + course.parts[2].exercises}</p>
+        
+  <p>
           {/*Edit <code>src/App.js</code> and save to reload.*/}
           
         </p>
-        <Header course={course} />
-        <Total total={parts[0].exercises+parts[1]['exercises']+parts[2]['exercises']}/>
-        <Content part1={parts[0].name} excersise1={parts[0].exercises} part2={parts[1].name} excersise2={parts[1].exercises} part3={parts[2].name} excersise3={parts[2].exercises}/>
+        <Header course={course.name} />
+        <Total total={course.parts[0].exercises+course.parts[1]['exercises']+course.parts[2]['exercises']}/>
+        <Content part1={course.parts[0].name} excersise1={course.parts[0].exercises} part2={course.parts[1].name} excersise2={course.parts[1].exercises} part3={course.parts[2].name} excersise3={course.parts[2].exercises}/>
+
         <a
           className="App-link"
           href="https://reactjs.org"
