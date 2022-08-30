@@ -18,16 +18,16 @@ const Part=(props)=>{
 const Content=(props)=>{
   return(
     <div>
-    <Part name={props.part1} excersise={props.excersise1}/>
-    <Part name={props.part2} excersise={props.excersise2}/>
-    <Part name={props.part3} excersise={props.excersise3}/>
+    <Part name={props.part1["parts"][0].name} excersise={props.part1["parts"][0].exercises}/>
+    <Part name={props.part1["parts"][1].name} excersise={props.part1["parts"][1].exercises}/>
+    <Part name={props.part1["parts"][2].name} excersise={props.part1["parts"][2].exercises}/>
     </div>
   )
 }
 const Total=(props)=>{
   return(
     [
-      <p>The total number of exercises is {props.total}</p>
+      <p>The total number of exercises is {props.total["parts"][0]["exercises"]+props.total["parts"][1]["exercises"]+props.total["parts"][2]["exercises"]}</p>
     ]
   )
 }
@@ -71,9 +71,8 @@ const App=()=> {
           
         </p>
         <Header course={course.name} />
-        <Total total={course.parts[0].exercises+course.parts[1]['exercises']+course.parts[2]['exercises']}/>
-        <Content part1={course.parts[0].name} excersise1={course.parts[0].exercises} part2={course.parts[1].name} excersise2={course.parts[1].exercises} part3={course.parts[2].name} excersise3={course.parts[2].exercises}/>
-
+        <Total total={course}/>
+        <Content part1={course}/>
         <a
           className="App-link"
           href="https://reactjs.org"
