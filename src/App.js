@@ -3,7 +3,7 @@ import './App.css';
 const Header = (props) => {
   return (
     <div>
-      <h1>The name of the course is {props.course}</h1>
+      <h1>The name of the course is {props.course["name"]}</h1>
     </div>
   )
 }
@@ -70,7 +70,7 @@ const App=()=> {
           {/*Edit <code>src/App.js</code> and save to reload.*/}
           
         </p>
-        <Header course={course.name} />
+        <Header course={course} />
         <Total total={course}/>
         <Content part1={course}/>
         <a
