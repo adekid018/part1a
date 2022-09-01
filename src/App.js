@@ -13,13 +13,8 @@ const Button=({onClicked,text})=>{
 return <button onClick={onClicked}>{text}</button>
 }
 
-const App=()=> {
-  const [value, changedValue]=useState(0)
-  
 
-  /*const good=()=>changedValue({...value,good:value.good+1})
-  const bad=()=>changedValue({...value,bad:value.bad+1})
-  const neutral=()=>changedValue({...value,neutral:value.neutral+1})*/
+const App=()=> {
   const anecdotes = [
     'If it hurts, do it more often.',
     'Adding manpower to a late software project makes it later!',
@@ -29,7 +24,28 @@ const App=()=> {
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.'
   ]
-  const random=()=>{changedValue(Math.floor(Math.random()*anecdotes.length))}
+  const [value, changedValue]=useState(0)
+  
+  const [valueArray, changedValueArray]=useState(new Array(anecdotes.length).fill(0))
+  
+  const votes =()=>{
+    const copy = [...valueArray]
+    copy[value] += 1
+    changedValueArray(copy)
+  }
+  
+  // increment the value in position 2 by one
+  
+  
+  /*const good=()=>changedValue({...value,good:value.good+1})
+  const bad=()=>changedValue({...value,bad:value.bad+1})
+  const neutral=()=>changedValue({...value,neutral:value.neutral+1})*/
+  
+  if(value>anecdotes.length){
+    changedValue(0)
+  }
+  const random=()=>{changedValue(value+1)}
+
   const course={
     name:'Half stacks application development',
   }
@@ -41,9 +57,10 @@ const App=()=> {
         <h1>{course.name}</h1>
           {/*Edit <code>src/App.js</code> and save to reload.*/}
         <Header course={course} />
-
         <Button onClicked={random} text={"Enter Value"} />
-        <p>{anecdotes[value]}</p>
+        <Button onClicked={votes} text={"Vote"} />
+
+        <p>{anecdotes[value]} has {valueArray[value]} votes</p>
 
         <h2>Statistic</h2>
         
