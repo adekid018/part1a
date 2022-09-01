@@ -8,16 +8,20 @@ const Header = (props) => {
     </div>
   )
 }
-const DisplayValue=({text})=><h3>The current value is {text}</h3>
+const DisplayValue=({outcome,text})=><p>{text} {outcome}</p>
 const Button=({onClicked,text})=>{
 return <button onClick={onClicked}>{text}</button>
 }
 
 const App=()=> {
-  const [counterValue, increaseCounterValue]=useState(0)
-  const increase=()=>increaseCounterValue(counterValue+1)
-  const decrease=()=>increaseCounterValue(counterValue-1)
-  const reset=()=>increaseCounterValue(0)
+  const [value, changedValue]=useState({
+    good:0,
+    bad:0,
+    neutral:0
+  })
+  const good=()=>changedValue({...value,good:value.good+1})
+  const bad=()=>changedValue({...value,bad:value.bad+1})
+  const neutral=()=>changedValue({...value,neutral:value.neutral+1})
   const course={
     name:'Half stacks application development',
   }
@@ -25,13 +29,19 @@ const App=()=> {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+
         <h1>{course.name}</h1>
           {/*Edit <code>src/App.js</code> and save to reload.*/}
         <Header course={course} />
-        <DisplayValue text={counterValue} />
-        <Button onClicked={increase} text={"Plus1"} />
-        <Button onClicked={decrease} text={"Minus1"} />
-        <Button onClicked={reset} text={"Reset"} />
+
+        <Button onClicked={good} text={"Good"} />
+        <Button onClicked={neutral} text={"Neutral"} />
+        <Button onClicked={bad} text={"Bad"} />
+
+        <DisplayValue text={"Good"} outcome={value.good} />
+        <DisplayValue text={"Neutral"} outcome={value.neutral} />
+        <DisplayValue text={"Bad"} outcome={value.bad} />
+        
         <a
           className="App-link"
           href="https://reactjs.org"
