@@ -8,7 +8,15 @@ const Header = (props) => {
     </div>
   )
 }
-const Statistic=({outcome,text})=><p>{text} {outcome}</p>
+const Statistic=({outcome,text})=>{
+
+if(outcome===0){
+  console.log(outcome)
+return (<p>No FeedBack Given Yet</p>)  
+}else{
+return <p>{text} {outcome}</p>
+}
+}
 const Button=({onClicked,text})=>{
 return <button onClick={onClicked}>{text}</button>
 }
