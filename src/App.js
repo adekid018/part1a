@@ -41,6 +41,9 @@ const App=()=> {
         <DisplayValue text={"Good"} outcome={value.good} />
         <DisplayValue text={"Neutral"} outcome={value.neutral} />
         <DisplayValue text={"Bad"} outcome={value.bad} />
+        <DisplayValue text={"All"} outcome={(value.good+value.bad+value.neutral)} />
+        <DisplayValue text={"Average:"} outcome={((value.good/1)+(value.bad/-1))/3} />
+        <DisplayValue text={"Positive Percentage:"} outcome={((value.good)/(value.good+value.bad+value.neutral))*100 + "%"} />
         
         <a
           className="App-link"
