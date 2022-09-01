@@ -11,10 +11,17 @@ const Header = (props) => {
 const Statistic=({outcome,text})=>{
 
 if(outcome===0){
-  console.log(outcome)
 return (<p>No FeedBack Given Yet</p>)  
 }else{
-return <p>{text} {outcome}</p>
+return (<table>
+  <tbody>
+  <tr>
+    <td>{text}</td>
+    <td>{outcome}</td>
+  </tr>
+  </tbody>
+</table>
+)
 }
 }
 const Button=({onClicked,text})=>{
