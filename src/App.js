@@ -8,7 +8,7 @@ const Header = (props) => {
     </div>
   )
 }
-const DisplayValue=({outcome,text})=><p>{text} {outcome}</p>
+const Statistic=({outcome,text})=><p>{text} {outcome}</p>
 const Button=({onClicked,text})=>{
 return <button onClick={onClicked}>{text}</button>
 }
@@ -37,13 +37,13 @@ const App=()=> {
         <Button onClicked={good} text={"Good"} />
         <Button onClicked={neutral} text={"Neutral"} />
         <Button onClicked={bad} text={"Bad"} />
-
-        <DisplayValue text={"Good"} outcome={value.good} />
-        <DisplayValue text={"Neutral"} outcome={value.neutral} />
-        <DisplayValue text={"Bad"} outcome={value.bad} />
-        <DisplayValue text={"All"} outcome={(value.good+value.bad+value.neutral)} />
-        <DisplayValue text={"Average:"} outcome={((value.good/1)+(value.bad/-1))/3} />
-        <DisplayValue text={"Positive Percentage:"} outcome={((value.good)/(value.good+value.bad+value.neutral))*100 + "%"} />
+        <h2>Statistic</h2>
+        <Statistic text={"Good"} outcome={value.good} />
+        <Statistic text={"Neutral"} outcome={value.neutral} />
+        <Statistic text={"Bad"} outcome={value.bad} />
+        <Statistic text={"All"} outcome={(value.good+value.bad+value.neutral)} />
+        <Statistic text={"Average:"} outcome={((value.good/1)+(value.bad/-1))/3} />
+        <Statistic text={"Positive Percentage:"} outcome={((value.good)/(value.good+value.bad+value.neutral))*100 + "%"} />
         
         <a
           className="App-link"
