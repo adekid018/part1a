@@ -23,14 +23,23 @@ const App=()=> {
         name: 'State of a component',
         exercises: 14,
         id: 3
+      },
+      {
+        name: 'Redux',
+        exercises: 11,
+        id: 4
       }
     ]
   }
+//const them=course.parts.map(val=>console.log(val.exercises))
+//const all=course.parts.reduce((acc,cur)=>acc+cur.exercises,0)
+//console.log(all)
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Course  course={course}/>
+        
         <a
           className="App-link"
           href="https://reactjs.org"
