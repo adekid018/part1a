@@ -1,8 +1,8 @@
 import React from "react";
 const Phonebook=(props)=>{
-    const {contact}=props
+    const {contact,phoneNumber}=props
     return(
-      <li>{contact}</li>
+      <li>{contact}{phoneNumber}</li>
     )
 }
 export default Phonebook
