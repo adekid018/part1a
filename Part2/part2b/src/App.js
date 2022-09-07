@@ -1,93 +1,31 @@
-/*import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
-import Note from './components/Note';
-import { useState } from 'react';
-
-const App=(props)=> {
-  const {notes}=props
-  const [note,setNote]=useState(props.notes)
-  const [newNote, setNewNote] = useState(
-    " "
-  ) 
-  const [showAll, setShowAll] = useState(true)
-
-  const notesToShow = showAll
-  ? notes
-  : notes.filter(note => note.important === true)
-
-  const addNote=(event)=>{
-    event.preventDefault();
-    console.log("hello",event.target)
-    const noteObject = {
-      content: newNote,
-      date: new Date().toISOString(),
-      important: Math.random() < 0.5,
-      id: note.length + 1,
-    }
-    setNote(note.concat(noteObject))
-    setNewNote('')
-  }
-  const handleChanges=(event)=>{
-    console.log(event.target.value)
-    setNewNote(event.target.value)
-  }
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <div>
-        <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all' }
-        </button>
-      </div>
-        <ul>
-          {notesToShow.map((value)=><Note key={value.id} note={value.content}/>)}
-        </ul>
-        <form onSubmit={addNote}>
-        <input value={newNote}
-        onChange={handleChanges}
-        />
-        <button type="submit">save</button>
-      </form>   
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
-*/
-import logo from './logo.svg';
-import './App.css';
-import Note from './components/Note';
+import Phonebook from './components/Phonebook';
 import { useState } from 'react';
 
 
 const App = () => {
+  //Decleare a use state for the contact
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas' }
-  ]) 
+  ])
+  //Decleare a use state for updating the contact
   const [newName, setNewName] = useState('')
+  
+  //an event handler used to add the contact to the person state 
   const noteSubmitted=(event)=>{
+    //stopping it from submiting automatically
     event.preventDefault();
-    console.log(event.target)
     const noteObj={
       name:newName
     }
+    //updating the person state
     setPersons(persons.concat(noteObj))
+    //reseting the input value
     setNewName("")
-    
   }
-  
-  const myNewContact=(event)=>{
+  //handling the changes made on the input
+  const updatingName=(event)=>{
     console.log(event.target.value)
     setNewName(event.target.value)
   }
@@ -98,14 +36,14 @@ const App = () => {
   
       <form onSubmit={noteSubmitted}>
         <div>
-          name: <input  value={newName} onChange={myNewContact}/>
+          name: <input  value={newName} onChange={updatingName}/>
         </div>
         <div>
           <button type="submit">add</button>
         </div>
       </form>
       <h2>Numbers</h2>
-      {persons.map((value)=><Note key={value.name} note={value.name}/>)}
+      {persons.map((value)=><Phonebook key={value.name} note={value.name}/>)}
     </div>
   )
 }
