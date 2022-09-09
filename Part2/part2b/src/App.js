@@ -14,6 +14,8 @@ const App = () => {
   //Decleare a use state for updating the contact
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [display,setDisplay]=useState('')
+  
   //an event handler used to add the contact to the person state 
   const noteSubmitted=(event)=>{
     //stopping it from submiting automatically
@@ -43,6 +45,13 @@ const App = () => {
     //reseting the input value
   
   }
+  //filtering outcome
+  const handledisplay=(event)=>{
+    setDisplay(event.target.value)
+    console.log(event.target.value)
+  }
+
+  let outCome=persons.filter((word)=>word.name.toLowerCase().includes(display.toLowerCase()))  
   //handling the name changes made on the input
   const updatingName=(event)=>{
     console.log(event.target.value)
@@ -57,10 +66,11 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      filter shown with: <input value={display} onChange={handledisplay}/>
       <h3>Add a new</h3>
       <PersonForm submission={noteSubmitted} newName={newName} updatingName={updatingName} newNumber={newNumber} updatingNumber={updatingNumber}/>
       <h3>Numbers</h3>
-      {persons.map((value)=>
+      {outCome.map((value)=>
       <Phonebook key={value.id} contact={value.name} phoneNumber={value.number}/>)}
     </div>
   )
