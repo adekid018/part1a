@@ -40,19 +40,39 @@ const App = () => {
   
   const handledDelete=(id,name)=>{
     const ur=`http://localhost:3001/persons/${id}`
-    window.confirm(`Delete ${name}`)?severs.deletion(id).then(setPersons(persons.filter(val=>val.id!==id))):axios.get(ur)
+    window.confirm(`Delete ${name}?`)?severs.deletion(id).then(setPersons(persons.filter(val=>val.id!==id))):axios.get(ur)
     //window.confirm(`Delete ${name}`)?axios.delete(ur).then(setPersons(persons.filter(val=>val.id!==id))):axios.get(ur)
   }
+
+
   const numberSubmitted=(event)=>{
     event.preventDefault();
    let addedContact={
       name:name,
       number:number
     }
-    severs
-    .addedContact(addedContact)
-    .then(myresponse=>setPersons(persons.concat(myresponse)))
+    const findName=persons.find((value)=>value.name===name)
+    const url="http://localhost:3001/persons"
+    
+    if(findName){
+      const changeNote={...findName,number:number}
+      window.confirm(`Do you want to replace this number`)
+      ?axios
+      .put(`${url}/${findName.id}`,changeNote)
+      .then(response=>{
+        setPersons(persons.map(value=>value.name!==name?value:response.data))
+      }):setPersons(persons)
+      console.log("number  exist")  
+    }
+
+    else{
+    axios
+    .post("http://localhost:3001/persons",addedContact)
+    .then(myresponse=>setPersons(persons.concat(myresponse.data)))
   }
+  console.log("number does not exist")  
+    }
+    
   const output=persons.filter((value)=>value.name.toLowerCase().includes(display.toLowerCase()))
   return (
     <div>
