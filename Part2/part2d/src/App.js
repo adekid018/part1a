@@ -1,21 +1,21 @@
+
+
 import './App.css';
 import Phonebook from './components/Phonebook';
 import { useState,useEffect } from 'react';
+import severs from './PhoneSever/severs'
 import axios from  'axios'
+
 const App = () => {
   //using useEffect
-  
+  console.log(`this is ${severs.all()}`)
   useEffect(()=>{
-    console.log("adebayoaa519@gmail.com")
-    axios
-    .get("http://localhost:3001/persons")
+    severs
+    .all()
     .then(response=>{
-      //console.log("working")
-      //console.log(response.data.name)
-      //console.log("working")
-      setPersons(response.data)
+      setPersons(response)
     })
-  })
+  },[])
   //Decleare a use state for the contact
   const [persons, setPersons] = useState([])
   const [display,setDisplay]=useState('')
@@ -43,10 +43,9 @@ const App = () => {
       name:name,
       number:number
     }
-    axios.post("http://localhost:3001/persons",addedContact)
-    .then(response=>setPersons(persons.concat(response.data)))
-    setName("")
-    setNumber("")
+    severs
+    .addedContact(addedContact)
+    .then(myresponse=>setPersons(persons.concat(myresponse)))
   }
   const output=persons.filter((value)=>value.name.toLowerCase().includes(display.toLowerCase()))
   return (
@@ -60,8 +59,8 @@ const App = () => {
       <button type='submit'>Add</button>
       </form>
       <h3>Numbers</h3>
-      {output.map((value,i)=>
-      <Phonebook key={i} contact={value.name} phoneNumber={value.number}/>)}
+      {output.map((value)=>
+      <Phonebook key={value.id} contact={value.name} phoneNumber={value.number}/>)}
     </div>
   )
 }
