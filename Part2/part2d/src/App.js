@@ -16,6 +16,7 @@ const App = () => {
       setPersons(response)
     })
   },[])
+  
   //Decleare a use state for the contact
   const [persons, setPersons] = useState([])
   const [display,setDisplay]=useState('')
@@ -37,6 +38,11 @@ const App = () => {
     //console.log(event.target.value)
   }
   
+  const handledDelete=(id,name)=>{
+    const ur=`http://localhost:3001/persons/${id}`
+    window.confirm(`Delete ${name}`)?severs.deletion(id).then(setPersons(persons.filter(val=>val.id!==id))):axios.get(ur)
+    //window.confirm(`Delete ${name}`)?axios.delete(ur).then(setPersons(persons.filter(val=>val.id!==id))):axios.get(ur)
+  }
   const numberSubmitted=(event)=>{
     event.preventDefault();
    let addedContact={
@@ -60,7 +66,7 @@ const App = () => {
       </form>
       <h3>Numbers</h3>
       {output.map((value)=>
-      <Phonebook key={value.id} contact={value.name} phoneNumber={value.number}/>)}
+      <Phonebook key={value.id} contact={value.name} phoneNumber={value.number} deletion={()=>handledDelete(value.id,value.name)}/>)}
     </div>
   )
 }
