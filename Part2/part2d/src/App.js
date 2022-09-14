@@ -5,7 +5,7 @@ import Phonebook from './components/Phonebook';
 import { useState,useEffect } from 'react';
 import severs from './PhoneSever/severs'
 import axios from  'axios'
-
+import Sucessfull from './components/sucessfull';
 const App = () => {
   //using useEffect
   console.log(`this is ${severs.all()}`)
@@ -22,7 +22,7 @@ const App = () => {
   const [display,setDisplay]=useState('')
   const [number,setNumber]=useState('')
   const [name,setName]=useState('')
-  
+  const [sucess,setSucess]=useState('')
   //filtering outcome
   const handledisplay=(event)=>{
     setDisplay(event.target.value)
@@ -66,22 +66,26 @@ const App = () => {
     }
 
     else{
-    axios
-    .post("http://localhost:3001/persons",addedContact)
-    .then(myresponse=>setPersons(persons.concat(myresponse.data)))
+    //axios
+    //.post("http://localhost:3001/persons",addedContact)
+    severs
+    .addedContact(addedContact)
+    .then(myresponse=>setPersons(persons.concat(myresponse)))
+    setSucess(`Succesfully Added ${name}`)
+    setTimeout(()=>setSucess(null),5000)
   }
   console.log("number does not exist")  
     }
-    
   const output=persons.filter((value)=>value.name.toLowerCase().includes(display.toLowerCase()))
   return (
     <div>
       <h2>Phonebook page</h2>
       filter shown with: <input value={display} onChange={handledisplay}/>
+      <Sucessfull name={sucess}/>
       <h3>Add a new</h3>
       <form onSubmit={numberSubmitted}>
-      name: <input value={name} onChange={handledName}/>
-      number: <input value={number} onChange={handledNumber}/>
+      <label>Name: </label> <input value={name} onChange={handledName}/>
+      <label>Number: </label><input value={number} onChange={handledNumber}/>
       <button type='submit'>Add</button>
       </form>
       <h3>Numbers</h3>

@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+h2{
+  color: grey;
+  font-style: italic;
+  text-align: center;
+}
+.numbers{
+  padding-top: 3px;
+  font-size: 15px;
+}
+form input{
+  display:block;
+}
+label{
+  font-size: large;
+  font-weight: 700;
+}

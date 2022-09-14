@@ -14,6 +14,6 @@ const deletion=(id)=>{
 }
 
 export default {all,
-    addedContact,
-    deletion}
+    addedContact, 
+       deletion}
 
