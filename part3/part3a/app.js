@@ -31,7 +31,7 @@ app.get('/info',(req,res)=>{
     res.send(`<p>Phonebook has info for ${persons.length} people</p><p>${date}</p>`)
 })
 app.get('/persons/:id',(req,res)=>{
-  const note=req.params.id
+  const note=Number(req.params.id)
   const find=persons.find(value=>value.id===note)
   if(find){
     res.json(find)
@@ -39,6 +39,11 @@ app.get('/persons/:id',(req,res)=>{
   else{
     res.status(204).end()
   }
+})
+app.delete('/persons/:id',(req,res)=>{
+    const myRequest=Number(req.params.id)
+    const findNotes=persons.find(note=>note.id!==myRequest)
+    res.status(204).end()
 })
 /*app.get('/notes/:id',(req,res)=>{
     const myRequest=Number(req.params.id)
