@@ -62,4 +62,4 @@ app.delete('/notes/:id',(req,res)=>{
 })*/
 const port=3001
 app.listen(port)
-console.log('sever running');
+console.log('sever is running');
