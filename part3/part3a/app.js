@@ -23,6 +23,7 @@ let persons=[
     }
 ]
 app.get('/persons',(req,res)=>{
+  console.log(res.json.persons);
     res.json(persons)
 })
 /*app.get('/notes/:id',(req,res)=>{
@@ -40,6 +41,6 @@ app.delete('/notes/:id',(req,res)=>{
     const findNotes=notes.find(note=>note.id!==myRequest)
     res.status(204).end()
 })*/
-const port=3000
+const port=3001
 app.listen(port)
 console.log('sever running');
