@@ -4,7 +4,13 @@ app.use(express.json())
 const cors=require('cors')
 app.use(cors())
 const morgan=require('morgan')
-app.use(morgan('tiny'))
+//app.use(morgan('tiny'))
+//app.use(morgan(':method :url :body'))
+morgan.token('body', req => {
+    return JSON.stringify(req.body)
+  })
+  
+  app.use(morgan(':method :url :body'))
 let persons=[
     {
       "name": "Arto Hellas",
