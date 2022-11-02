@@ -3,6 +3,8 @@ const app=express()
 app.use(express.json())
 const cors=require('cors')
 app.use(cors())
+const morgan=require('morgan')
+app.use(morgan('tiny'))
 let persons=[
     {
       "name": "Arto Hellas",
@@ -44,8 +46,17 @@ let persons=[
       "number": "08172957673",
       "id": 8
     }
-  ]
-  
+  ]/*
+  const requestLogger = (request, response, next) => {
+    console.log('Method:', request.method)
+    console.log('Path:  ', request.path)
+    console.log('Body:  ', request.body)
+    console.log('---')
+    next()
+  }
+
+  app.use(requestLogger)
+*/
 app.get("/api/persons",(req,res)=>{
     res.json(persons)
 })
@@ -58,13 +69,13 @@ const maxId=persons.length>0?
 }
 app.post("/api/persons",(req,res)=>{
     const person=req.body
-    console.log("first body",person.name);
+    //console.log("first body",person.name);
     const newPerson={
         name:person.name,
         number:person.number,
         id:generateId()
     }
-    console.log(!newPerson.number);
+    //console.log(!newPerson.number);
     if(!newPerson.number||!newPerson.name){
        return res.status(400).json({
         error:"Name Missing"
@@ -78,7 +89,7 @@ app.post("/api/persons",(req,res)=>{
     }
     //console.log(`this is the finded name ${findname}`);
     persons=persons.concat(newPerson)
-    console.log(newPerson);
+    //console.log(persons);
     res.json(newPerson)
 })
 app.get("/api/normal",(req,res)=>{
@@ -100,6 +111,11 @@ app.delete("/api/persons/:id",(req,res)=>{
     const findPerson=persons.filter(i=>i.id!==id)
     res.status(204).end()
 })
+  const unknownEndpoint = (request, response) => {
+    response.status(404).send({ error: 'unknown endpoint' })
+  }
+  
+  app.use(unknownEndpoint)
 const PORT = process.env.PORT || 4000
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
