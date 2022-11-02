@@ -6,7 +6,7 @@ const Sucessfull=({name})=>{
         display:"flex",
         fontWeight:'bold',
         bordeRadius: 5,
-        padding:10
+        padding:10,
     }
     return(
         <p style={sucessfulStyle}>{name}</p>

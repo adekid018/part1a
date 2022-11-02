@@ -13,7 +13,8 @@ const deletion=(id)=>{
     return axios.delete(`${url}/${id}`)
 }
 
-export default {all,
+export default {
+    all,
     addedContact, 
        deletion}
 

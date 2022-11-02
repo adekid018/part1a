@@ -22,7 +22,7 @@ const App = () => {
   const [display,setDisplay]=useState('')
   const [number,setNumber]=useState('')
   const [name,setName]=useState('')
-  const [sucess,setSucess]=useState('')
+  const [sucess,setSucess]=useState()
   //filtering outcome
   const handledisplay=(event)=>{
     setDisplay(event.target.value)
