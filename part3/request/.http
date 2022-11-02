@@ -9,3 +9,14 @@ Content-Type: application/json
     "number":"08022510639"
 }
 
+
+
+###
+POST http://localhost:4000/api/persons
+Content-Type: application/json
+
+{
+    "name":"adenike",
+    "number":"08022510639"
+}
+

@@ -64,11 +64,19 @@ app.post("/api/persons",(req,res)=>{
         number:person.number,
         id:generateId()
     }
-    if(!newPerson.name){
+    console.log(!newPerson.number);
+    if(!newPerson.number||!newPerson.name){
        return res.status(400).json({
         error:"Name Missing"
        })
     }
+    const findname=persons.find(i=>i.name===newPerson.name)
+    if(findname){
+        return res.status(400).json({
+            error:"Name Must be unique"
+           })
+    }
+    //console.log(`this is the finded name ${findname}`);
     persons=persons.concat(newPerson)
     console.log(newPerson);
     res.json(newPerson)
