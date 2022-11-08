@@ -1,16 +1,18 @@
+//import persons from './part3a/db.json'
 const express=require('express')
 const app=express()
 app.use(express.json())
 const cors=require('cors')
 app.use(cors())
 const morgan=require('morgan')
+//console.log(persons);
 //app.use(morgan('tiny'))
 //app.use(morgan(':method :url :body'))
 morgan.token('body', req => {
     return JSON.stringify(req.body)
   })
-  
   app.use(morgan(':method :url :body'))
+  
 let persons=[
     {
       "name": "Arto Hellas",
@@ -52,7 +54,8 @@ let persons=[
       "number": "08172957673",
       "id": 8
     }
-  ]/*
+  ]
+  /*
   const requestLogger = (request, response, next) => {
     console.log('Method:', request.method)
     console.log('Path:  ', request.path)
@@ -115,6 +118,7 @@ app.get("/api/persons/:id",(req,res)=>{
 app.delete("/api/persons/:id",(req,res)=>{
     const id=Number(req.params.id)
     const findPerson=persons.filter(i=>i.id!==id)
+    //persons=persons.concat(findPerson)
     res.status(204).end()
 })
   const unknownEndpoint = (request, response) => {
