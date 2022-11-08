@@ -6,8 +6,6 @@ if (process.argv.length < 3) {
 }
 
 const password = process.argv[2]
-//const nametoAdd = process.argv[3]
-//console.log("this is",nametoAdd)
 //const url = `mongodb+srv://notes-app-full:${password}@cluster1.lvvbt.mongodb.net/?retryWrites=true&w=majority`
 const url = `mongodb+srv://adekid018:${password}@cluster0.0elbxxa.mongodb.net/phoneBook?retryWrites=true&w=majority`
 const noteSchema = new mongoose.Schema({
@@ -28,11 +26,11 @@ mongoose
 
     const note = new Note({
       name:process.argv[3],
-      number:"08023307262",
+      number:process.argv[4],
       date: new Date()
     })
-
-    return note.save()
+//    console.log(result);
+  return note.save()
 
     /*Note.find({}).then(result => {
         result.forEach(note => {
@@ -44,6 +42,8 @@ mongoose
 
   .then(() => {
     console.log('note saved!')
+    console.log(`Added ${process.argv[3]} number ${process.argv[4]} to Phonebook`)
     return mongoose.connection.close()
   })
   .catch((err) => console.log(err))
+  
