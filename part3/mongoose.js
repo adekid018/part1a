@@ -32,7 +32,8 @@ if(process.argv.length===3){
         mongoose.connection.close()
       })
     })
-}else{
+}
+else{
 mongoose
   .connect(url)
   .then((result) => {
@@ -55,3 +56,5 @@ mongoose
   })
   .catch((err) => console.log(err))
 }
+
+
