@@ -39,7 +39,7 @@ const App = () => {
   }
   
   const handledDelete=(id,name)=>{
-    const ur=`http://localhost:3001/persons/${id}`
+    const ur=`http://localhost:4000/persons/${id}`
     window.confirm(`Delete ${name}?`)?severs.deletion(id).then(setPersons(persons.filter(val=>val.id!==id))):axios.get(ur)
     //window.confirm(`Delete ${name}`)?axios.delete(ur).then(setPersons(persons.filter(val=>val.id!==id))):axios.get(ur)
   }
@@ -52,15 +52,16 @@ const App = () => {
       number:number
     }
     const findName=persons.find((value)=>value.name===name)
-    const url="http://localhost:3001/persons"
+    const url="http://localhost:4000/api/persons"
     
     if(findName){
       const changeNote={...findName,number:number}
-      window.confirm(`Do you want to replace this number`)
-      ?axios
+      window.confirm(`Do you want to replace this number`)?
+      axios
       .put(`${url}/${findName.id}`,changeNote)
       .then(response=>{
-        setPersons(persons.map(value=>value.name!==name?value:response.data))
+        console.log(response)
+       setPersons(persons.map(value=>value.name!==name?value:response.data))
       }):setPersons(persons)
       console.log("number  exist")  
     }
@@ -77,7 +78,9 @@ const App = () => {
   setName('')
   setNumber('')
     }
-  const output=persons.filter((value)=>value.name.toLowerCase().includes(display.toLowerCase()))
+  //const output=persons.filter((value)=>value.name.toLowerCase().includes(display.toLowerCase()))
+  //const output=persons.filter((value)=>console.log("This is",val))
+  
   return (
     <div>
       <h2>Phonebook page</h2>
@@ -90,7 +93,7 @@ const App = () => {
       <button type='submit'>Add</button>
       </form>
       <h3>Numbers</h3>
-      {output.map((value)=>
+      {persons.map((value)=>
       <Phonebook key={value.id} contact={value.name} phoneNumber={value.number} deletion={()=>handledDelete(value.id,value.name)}/>)}
     </div>
   )

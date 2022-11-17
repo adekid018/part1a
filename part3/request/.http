@@ -18,3 +18,5 @@ Content-Type: application/json
     "name":"mullar",
     "number":"08022510639"
 }
+###
+DELETE  http://localhost:4000/api/persons/636b86c4f6971f00c47ebeac
