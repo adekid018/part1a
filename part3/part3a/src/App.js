@@ -8,7 +8,7 @@ import axios from  'axios'
 import Sucessfull from './components/sucessfull';
 const App = () => {
   //using useEffect
-  console.log(`this is ${severs.all()}`)
+  //console.log(`this is ${severs.all()}`)
   useEffect(()=>{
     severs
     .all()
@@ -71,9 +71,16 @@ const App = () => {
     //.post("http://localhost:3001/persons",addedContact)
     severs
     .addedContact(addedContact)
-    .then(myresponse=>setPersons(persons.concat(myresponse)))
-    setSucess(`Succesfully Added ${name}`)
-    setTimeout(()=>setSucess(null),5000)
+    .then(myresponse=>{
+      setPersons(persons.concat(myresponse))
+      setSucess(`Succesfully Added ${name}`)
+    })
+    .catch(error=>{
+      //setSucess(error.response.data.error)
+      setSucess(<Sucessfull name={error.response.data.error}/>)
+      console.log(error.response.data.error)
+    })
+    setTimeout(()=>setSucess(null),4000)
   }
   setName('')
   setNumber('')

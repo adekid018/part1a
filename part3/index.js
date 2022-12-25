@@ -49,7 +49,7 @@ app.delete('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
-app.post("/api/persons",(req,res)=>{
+app.post("/api/persons",(req,res,next)=>{
     const person=req.body
     //console.log("first body",person.name);
     const newPerson= new Note({
@@ -58,9 +58,11 @@ app.post("/api/persons",(req,res)=>{
         date:Date()
 
     })
-    newPerson.save().then(result=>{
+    newPerson.save()
+    .then(result=>{
       res.json(result)
     })
+    .catch(error=>next(error))
     
 })
 /*3.17*: Phonebook database, step5 If the user tries to create a new phonebook entry for a person whose name is already in the phonebook, the frontend will try to update the phone number of the existing entry by making an HTTP PUT request to the entry's unique URL.*/
@@ -94,7 +96,9 @@ Move the error handling of the application to a new error handler middleware*/
     if (error.name === 'CastError') {
       return response.status(400).send({ error: 'malformatted id' })
     } 
-  
+    else if(error.name === 'ValidationError'){
+      return response.status(400).json({error:error.message})
+    }
     next(error)
   }
   

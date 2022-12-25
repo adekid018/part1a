@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Error } from 'mongoose'
 
 const url="http://localhost:4000/api/persons"
 
@@ -8,8 +9,9 @@ const all=()=>{
 }
 const addedContact=(doc)=>{
     const dataToBeAdded=axios.post(url,doc)
-    return dataToBeAdded.then(response=>response.data)
-}
+    return dataToBeAdded
+    .then(response=>response.data)
+    }
 const deletion=(id)=>{
     return axios.delete(`${url}/${id}`)
 }

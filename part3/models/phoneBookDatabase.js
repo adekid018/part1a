@@ -10,8 +10,15 @@ mongoose
     console.log("error connecting to mongoDb",error.message);
 })
 const noteSchema = new mongoose.Schema({
-    name: String,
-    number: String,
+    name:{
+      type:String,
+      minLength:3,
+      require:true
+    },
+    number:{
+      type:Number,
+      require:true
+    },
     date:Date,
   })
   
