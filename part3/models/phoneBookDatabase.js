@@ -13,11 +13,19 @@ const noteSchema = new mongoose.Schema({
     name:{
       type:String,
       minLength:3,
-      require:true
+      required:true
     },
     number:{
-      type:Number,
-      require:true
+      type:String,
+      /*3.20*: Phonebook database, step8
+Add validation to your phonebook application, that will make sure that phone numbers are of the correct form. A phone number must*/
+      validate:{
+        validator:(v)=>{
+        return /^(\d{2}|\d{3})-\d{7,8}$/.test(v)
+        },
+        message: props => `${props.value} is not a valid phone number!`
+      },
+      required:true
     },
     date:Date,
   })

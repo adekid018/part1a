@@ -1,7 +1,7 @@
 import React from "react"
 const Sucessfull=({name})=>{
     const sucessfulStyle={
-        color:'red',
+        color:'green',
         fontSize:30,
         display:"flex",
         fontWeight:'bold',
@@ -19,7 +19,7 @@ const Sucessfull=({name})=>{
     if(name===null){
         return null
     }
-    else if(name!==undefined && name<3){
+    else if(name!==undefined && name.length>25){
         return(
             <p style={unSucessfulStyle}>{name}</p>
         )

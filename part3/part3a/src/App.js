@@ -75,9 +75,9 @@ const App = () => {
       setPersons(persons.concat(myresponse))
       setSucess(`Succesfully Added ${name}`)
     })
+    
     .catch(error=>{
-      //setSucess(error.response.data.error)
-      setSucess(<Sucessfull name={error.response.data.error}/>)
+      setSucess(error.response.data.error)
       console.log(error.response.data.error)
     })
     setTimeout(()=>setSucess(null),4000)
