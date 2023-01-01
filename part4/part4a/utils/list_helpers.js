@@ -9,4 +9,8 @@ const totalLikes=(blogs)=>{
     ,0)
     return total
 }
-module.exports={dummy,totalLikes}
+const favouriteBlog=(blogs)=>{
+    const highestBlog=Math.max(...blogs.map(value=>value.likes))
+    return highestBlog
+}
+module.exports={dummy,totalLikes,favouriteBlog}
