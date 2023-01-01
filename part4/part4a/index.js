@@ -25,7 +25,6 @@ app.use('/blogs',blogRouters)
 app.use(middleWares.errorHandler)
 app.use(middleWares.unknownEndpoint)
 loggers.info(`Server running on port ${config.PORT}`)
-const port=4000
-app.listen(port,()=>{
+app.listen(config.PORT,()=>{
     console.log("Its working on port 4000");
 })

@@ -19,7 +19,7 @@ blogRouters.get('/:id',(req,res,next)=>{
     .catch(error=>next(error))
 })
 
-blogRouters.post('/',(req,res)=>{
+blogRouters.post('/',(req,res,next)=>{
     const request=req.body
     console.log(request);
     if(request.url===undefined){
@@ -35,6 +35,7 @@ blogRouters.post('/',(req,res)=>{
     .then(response=>{
         res.json(response)
     })
+    .catch(error=>next(error))
 })
 
 blogRouters.delete('/:id',(req,res,next)=>{
