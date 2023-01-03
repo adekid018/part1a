@@ -6,22 +6,25 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "jest --verbose"
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit"
   },
   "author": "Abdulazeez",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
     "mongoose": "^6.8.2",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
     "jest": "^29.3.1",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "supertest": "^6.3.3"
   },
   "jest": {
-    "testEnvironment":"node"
+    "testEnvironment": "node"
   }
 }

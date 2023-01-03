@@ -1,25 +1,24 @@
 const blogRouters=require('express').Router()
 const blogDatabase=require('../model/blogDatabase')
-blogRouters.get('/',(req,res)=>{
-    blogDatabase.find({}).then(reesponse=>{
-        res.json(reesponse)
-    })
+blogRouters.get('/',async(req,res)=>{
+    const blog= await blogDatabase.find({})
+    res.json(blog)
+    
     })
     
-blogRouters.get('/:id',(req,res,next)=>{
-    blogDatabase.findById(req.params.id)
-    .then(response=>{
+blogRouters.get('/:id',async (req,res,next)=>{
+    const response=await blogDatabase.findById(req.params.id)
+    
         if(response){
-        res.json(response)
+            
+        res.status(200).json(response)
      }
      else{
         res.status(404).end()
      }
-    })
-    .catch(error=>next(error))
 })
 
-blogRouters.post('/',(req,res,next)=>{
+blogRouters.post('/',async (req,res,next)=>{
     const request=req.body
     console.log(request);
     if(request.url===undefined){
@@ -31,18 +30,13 @@ blogRouters.post('/',(req,res,next)=>{
     url:request.url,
     vote:request.vote
     })
-    blog.save()
-    .then(response=>{
-        res.json(response)
-    })
-    .catch(error=>next(error))
+    const response=await blog.save()
+        res.status(201).json(response)
 })
 
-blogRouters.delete('/:id',(req,res,next)=>{
-    blogDatabase.findByIdAndRemove(req.params.id)
-    .then(result=>{
+blogRouters.delete('/:id', async (req,res,next)=>{
+    const response= await blogDatabase.findByIdAndRemove(req.params.id)
         res.status(204).end()
-    })
     .catch(error=>next(error))
 })
 module.exports=blogRouters

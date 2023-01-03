@@ -1,6 +1,9 @@
 const config = require('./utils/config')
 const express=require('express')
 const app=express()
+require('express-async-errors')
+const http = require('http')
+const server = http.createServer(app)
 const morgan=require('morgan')
 const cors=require('cors')
 app.use(morgan("tiny"))
@@ -25,6 +28,7 @@ app.use('/blogs',blogRouters)
 app.use(middleWares.errorHandler)
 app.use(middleWares.unknownEndpoint)
 loggers.info(`Server running on port ${config.PORT}`)
-app.listen(config.PORT,()=>{
-    console.log("Its working on port 4000");
+server.listen(config.PORT,()=>{
+    loggers.info("Its working on port 4000");
 })
+module.exports=app

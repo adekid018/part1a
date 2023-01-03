@@ -11,6 +11,9 @@ const totalLikes=(blogs)=>{
 }
 const favouriteBlog=(blogs)=>{
     const highestBlog=Math.max(...blogs.map(value=>value.likes))
+    console.log(highestBlog)
     return highestBlog
 }
+
+
 module.exports={dummy,totalLikes,favouriteBlog}
