@@ -52,7 +52,22 @@ test('blogs are returned as json', async () => {
     const response =await api.get('/blogs')
     expect(response.body).toHaveLength(initialBlogs.length+1)
     
-  })/*
+  })
+  
+  test('if author and title are missing return 400',async()=>{
+    const newBlog={
+      author:"Ase"
+    }
+    await api
+    .post('/blogs')
+    .send(newBlog)
+    .expect(400)
+    //.expect('Content-Type', /application\/json/)
+
+    const response=await api.get('/blogs')
+    expect(response.body).toHaveLength(initialBlogs.length)
+  })
+  /*
 /*
   test('there are three notes', async () => {
     const response = await api.get('/blogs')

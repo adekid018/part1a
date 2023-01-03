@@ -20,8 +20,9 @@ blogRouters.get('/:id',async (req,res,next)=>{
 blogRouters.post('/',async (req,res,next)=>{
     const request=req.body
     console.log(request);
-    if(request.url===undefined){
-        return res.status(204).json({error:"Content Missing"})
+    if(request.url===undefined || request.author===undefined){
+       return res.status(400).end()
+    //   return res.status(204).json({error:"Content Missing"})
     }
     const blog= new blogDatabase({
     author:request.author,
@@ -29,6 +30,7 @@ blogRouters.post('/',async (req,res,next)=>{
     url:request.url,
     vote:request.vote||0
     })
+    
     const response=await blog.save()
         res.status(201).json(response)
 })
