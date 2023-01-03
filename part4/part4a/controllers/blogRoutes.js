@@ -27,7 +27,7 @@ blogRouters.post('/',async (req,res,next)=>{
     author:request.author,
     title:request.title,
     url:request.url,
-    vote:request.vote
+    vote:request.vote||0
     })
     const response=await blog.save()
         res.status(201).json(response)
