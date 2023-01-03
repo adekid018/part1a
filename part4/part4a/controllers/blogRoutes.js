@@ -3,8 +3,7 @@ const blogDatabase=require('../model/blogDatabase')
 blogRouters.get('/',async(req,res)=>{
     const blog= await blogDatabase.find({})
     res.json(blog)
-    
-    })
+})
     
 blogRouters.get('/:id',async (req,res,next)=>{
     const response=await blogDatabase.findById(req.params.id)

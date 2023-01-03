@@ -34,6 +34,25 @@ test('blogs are returned as json', async () => {
       .expect(200)
       .expect('Content-Type', /application\/json/)
   })
+  
+  test('testing api post method', async ()=>{
+    const newBlog={
+      author: 'Adewale',
+      url:"www.google.com",
+      title:"FOOD",
+      date: new Date(),
+      important: true,
+    }
+    await api
+    .post('/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+    
+    const response =await api.get('/blogs')
+    expect(response.body).toHaveLength(initialBlogs.length+1)
+    
+  })/*
 /*
   test('there are three notes', async () => {
     const response = await api.get('/blogs')
@@ -57,6 +76,7 @@ test('blogs are returned as json', async () => {
       'Browser can execute only Javascript'
     )
   })
+  /*
   test('a valid note can be added', async () => {
     const newNote = {
         author: 'Adekiders',
