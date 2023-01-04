@@ -65,13 +65,12 @@ test('blogs are returned as json', async () => {
     const response=await api.get('/blogs')
     expect(response.body).toHaveLength(initialBlogs.length)
   })
-  
+  /*
   test('Deleting a single note',async () => {
     const blog = await api.get('/blogs')
     console.log(blog.body[0].id);
     const deleteBlog= blog.body[0].id
-    //console.log(deleteBlog.author)
-    //console.log(blog);
+  
     await api
     .delete(`/blogs/${deleteBlog}`)
     .expect(204)
@@ -80,6 +79,27 @@ test('blogs are returned as json', async () => {
     expect(response.body).toHaveLength(initialBlogs.length-1)
     expect(response.body).not.toContain(blog[0])
   })
+*/
+  test("Editing a note",async ()=>{
+    const update={
+        author: 'Adewale',
+        url:"www.google.com",
+        title:"FOOD",
+        date: new Date(),
+        important: true,
+    }
+    const data=await api.get('/blogs')
+    const id=data.body[0].id
+    await
+    api
+    .put(`/blogs/${id}`)
+    .send(update)
+    .expect(200)
+    const response=await api.get('/blogs')
+    const author=response.body.map(r=>r.author)
+    expect(author).toContain('Adewale')
+  })
+  
   /*
 /*
   test('there are three notes', async () => {

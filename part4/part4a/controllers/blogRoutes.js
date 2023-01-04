@@ -40,4 +40,15 @@ blogRouters.delete('/:id', async (req,res,next)=>{
         res.status(204).end()
     
 })
+blogRouters.put('/:id', async (req,res)=>{
+    const body=req.body
+    const update={
+            author:body.author,
+            title:body.title,
+            url:body.url,
+            vote:body.vote
+    }
+    const response=await blogDatabase.findByIdAndUpdate(req.params.id,update,{new:true})
+    res.json(response)
+})
 module.exports=blogRouters
