@@ -38,6 +38,6 @@ blogRouters.post('/',async (req,res,next)=>{
 blogRouters.delete('/:id', async (req,res,next)=>{
     const response= await blogDatabase.findByIdAndRemove(req.params.id)
         res.status(204).end()
-    .catch(error=>next(error))
+    
 })
 module.exports=blogRouters

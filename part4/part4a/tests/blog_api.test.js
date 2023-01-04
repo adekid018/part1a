@@ -48,13 +48,11 @@ test('blogs are returned as json', async () => {
     .send(newBlog)
     .expect(201)
     .expect('Content-Type', /application\/json/)
-    
     const response =await api.get('/blogs')
     expect(response.body).toHaveLength(initialBlogs.length+1)
-    
   })
   
-  test('if author and title are missing return 400',async()=>{
+  test('if author and title are missing return 400', async()=>{
     const newBlog={
       author:"Ase"
     }
@@ -66,6 +64,21 @@ test('blogs are returned as json', async () => {
 
     const response=await api.get('/blogs')
     expect(response.body).toHaveLength(initialBlogs.length)
+  })
+  
+  test('Deleting a single note',async () => {
+    const blog = await api.get('/blogs')
+    console.log(blog.body[0].id);
+    const deleteBlog= blog.body[0].id
+    //console.log(deleteBlog.author)
+    //console.log(blog);
+    await api
+    .delete(`/blogs/${deleteBlog}`)
+    .expect(204)
+    const response= await api.get('/blogs')
+    console.log(response.body.length)
+    expect(response.body).toHaveLength(initialBlogs.length-1)
+    expect(response.body).not.toContain(blog[0])
   })
   /*
 /*
