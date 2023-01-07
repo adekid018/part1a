@@ -3,7 +3,8 @@ const userRoutes=require('express').Router()
 const userDatabase=require('../model/userDatabase')
 
 userRoutes.get('/',async(req,res)=>{
-    const users= await userDatabase.find({})
+    const users= 
+    await userDatabase.find({}).populate('note')
     res.json(users)
 })
 userRoutes.post('/',async(req,res)=>{

@@ -2,7 +2,7 @@ const blogRouters=require('express').Router()
 const userDatabase=require('../model/userDatabase')
 const blogDatabase=require('../model/blogDatabase')
 blogRouters.get('/',async(req,res)=>{
-    const blog= await blogDatabase.find({})
+    const blog= await blogDatabase.find({}).populate("user",{name:1})
     res.json(blog)
 })
     

@@ -7,7 +7,7 @@ const userSchema=new mongoose.Schema({
     note:[
         {
             type:mongoose.Schema.Types.ObjectId,
-            ref:'Note'
+            ref:'Model'
         }
     ],
 })
