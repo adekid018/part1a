@@ -13,7 +13,11 @@ const blogSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    vote:String
+    vote:String,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      }
 })
 blogSchema.set('toJSON', {
     transform: (document, returnedObject) => {

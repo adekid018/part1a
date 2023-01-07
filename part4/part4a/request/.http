@@ -13,12 +13,24 @@ Content-Type: application/json
     "url":"kk",
     "vote":"5"
 }
+
 ###
 PUT http://localhost:4000/blogs/63ad85cb1c0a5ca69eea4ed7
 Content-Type: application/json
+
 {
     "author":"ae",
     "title":"How to become rice2",
     "url":"kk",
     "vote":"5"
+}
+
+###
+POST  http://localhost:4000/users
+Content-Type: application/json
+
+{
+    "username":"Abdulazeez",
+    "name":"Adebayo Abdulazeez Adeyinka",
+    "password":"Adekid@018"
 }
