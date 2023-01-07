@@ -4,14 +4,15 @@ GET http://localhost:4000/blogs
 DELETE http://localhost:4000/blogs/63ad51d9921015cdd2b5e6d9
 
 ###
-POST http://localhost:4000/blogs
+POST http://localhost:4000/blogs/
 Content-Type: application/json
 
 {
-    "author":"ae",
+    "author":"adekid019@gmail",
     "title":"How to become rice2",
     "url":"kk",
-    "vote":"5"
+    "vote":"5",
+    "userId":"63b92ddd301a9e2e0d2d9bf4"
 }
 
 ###
@@ -30,7 +31,10 @@ POST  http://localhost:4000/users
 Content-Type: application/json
 
 {
-    "username":"Abdulazeez",
-    "name":"Adebayo Abdulazeez Adeyinka",
-    "password":"Adekid@018"
+    "username":"Aisha",
+    "name":"Adebayo Aisha Adeyinka",
+    "password":"Aisha"
 }
+
+###
+GET http://localhost:4000/users

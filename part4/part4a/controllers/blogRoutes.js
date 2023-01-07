@@ -1,4 +1,5 @@
 const blogRouters=require('express').Router()
+const userDatabase=require('../model/userDatabase')
 const blogDatabase=require('../model/blogDatabase')
 blogRouters.get('/',async(req,res)=>{
     const blog= await blogDatabase.find({})
@@ -22,17 +23,29 @@ blogRouters.post('/',async (req,res,next)=>{
     console.log(request);
     if(request.url===undefined || request.author===undefined){
        return res.status(400).end()
-    //   return res.status(204).json({error:"Content Missing"})
+       //return res.status(204).json({error:"Content Missing"})
     }
+    const user= await userDatabase.findById(request.userId)
+    
+    
+    
     const blog= new blogDatabase({
     author:request.author,
     title:request.title,
     url:request.url,
-    vote:request.vote||0
+    vote:request.vote||0,
+    user:user._id
     })
+    console.log(blog.user);
+    //console.log(user._id);
+    //console.log(Object.keys(blog));
+    
     
     const response=await blog.save()
-        res.status(201).json(response)
+    user.note=user.note.concat(response._id)
+    await user.save()
+    res.status(201).json(response)
+        
 })
 
 blogRouters.delete('/:id', async (req,res,next)=>{
