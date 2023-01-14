@@ -36,5 +36,16 @@ Content-Type: application/json
     "password":"Aisha"
 }
 
+
+###
+POST  http://localhost:4000/users
+Content-Type: application/json
+
+{
+    "username":"Ai",
+    "name":"Adebayo Aisha Adeyinka",
+    "password":"Ai"
+}
+
 ###
 GET http://localhost:4000/users

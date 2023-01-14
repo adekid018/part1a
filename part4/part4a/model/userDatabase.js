@@ -2,9 +2,15 @@
 const mongoose=require('mongoose')
 
 const userSchema=new mongoose.Schema({
-    username:String,
+    username:{
+        type:String,
+        Required:true
+    },
     name:String,
-    passwordHash:String,
+    passwordHash:{
+        type:String,
+        Required:true
+    },
     note:[
         {
             type:mongoose.Schema.Types.ObjectId,
