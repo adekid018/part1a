@@ -2,6 +2,8 @@
 const blogRouters=require('express').Router()
 const userDatabase=require('../model/userDatabase')
 const blogDatabase=require('../model/blogDatabase')
+/*4.17: bloglist expansion, step5
+Expand blogs so that each blog contains information on the creator of the blog*/
 
 blogRouters.get('/',async(req,res)=>{
     const blog= await blogDatabase.find({}).populate("user",{name:1})
@@ -10,9 +12,7 @@ blogRouters.get('/',async(req,res)=>{
     
 blogRouters.get('/:id',async (req,res,next)=>{
     const response=await blogDatabase.findById(req.params.id)
-    
         if(response){
-            
         res.status(200).json(response)
      }
      else{
