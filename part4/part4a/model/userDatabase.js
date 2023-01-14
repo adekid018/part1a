@@ -1,3 +1,4 @@
+//userDatabase part of excersise 4.15 step3
 const mongoose=require('mongoose')
 
 const userSchema=new mongoose.Schema({
@@ -24,3 +25,4 @@ userSchema.set('toJSON', {
   const User = mongoose.model('User', userSchema)
   
   module.exports = User
+

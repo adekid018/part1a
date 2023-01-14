@@ -1,6 +1,7 @@
-const blogRouters=require('express').Router()
+/*const blogRouters=require('express').Router()
 const userDatabase=require('../model/userDatabase')
 const blogDatabase=require('../model/blogDatabase')
+
 blogRouters.get('/',async(req,res)=>{
     const blog= await blogDatabase.find({}).populate("user",{name:1})
     res.json(blog)
@@ -63,5 +64,22 @@ blogRouters.put('/:id', async (req,res)=>{
     }
     const response=await blogDatabase.findByIdAndUpdate(req.params.id,update,{new:true})
     res.json(response)
+})*/
+const blogDatabase=require('../model/blogDatabase')
+const userDatabase=require('../model/userDatabase')
+const blogRouters=require('express').Router()
+blogRouters.get('/',async(req,res)=>{
+    const response=await blogDatabase.find({})
+    res.json(response)
+})
+blogRouters.post('/',async(req,res)=>{
+    const body=req.body
+    const user=userDatabase.findOne(body.user)
+    const blog=new blogDatabase({
+        author:body.author,
+        title:body.title,
+        url:body.url,
+        vote:body.vote
+    })
 })
 module.exports=blogRouters

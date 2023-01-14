@@ -1,14 +1,14 @@
 GET http://localhost:4000/blogs
 
 ###
-DELETE http://localhost:4000/blogs/63ad51d9921015cdd2b5e6d9
+DELETE http://localhost:4000/blogs/63b95a394f2de5be92370462
 
 ###
 POST http://localhost:4000/blogs/
 Content-Type: application/json
 
 {
-    "author":"adekid019@gmail",
+    "author":"adekid",
     "title":"How to become rice2",
     "url":"kk",
     "vote":"5",
