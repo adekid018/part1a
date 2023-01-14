@@ -21,9 +21,10 @@ loginRoutes.post('/',async(req,res)=>{
     }
     const userForToken={
         username:searchingUser.username,
-        id:searchingUser._id
+        id:searchingUser._id,
+        
     }
-    const token=jwt.sign(userForToken,process.env.SECRET)
+    const token=jwt.sign(userForToken,process.env.SECRET,{expiresIn:60*60})
     res
     .status(200)
     .send(({token,username,name:searchingUser.name}))

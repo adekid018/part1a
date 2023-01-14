@@ -28,5 +28,9 @@ userRoutes.post('/',async(req,res)=>{
     const response=await newUser.save()
     res.status(201).json(response)
 })
+userRoutes.delete('/:id',async(req,res)=>{
+    const findId=await userDatabase.findByIdAndRemove(req.params.id)
+    return res.status(204).end()
+})
 module.exports=userRoutes
 
