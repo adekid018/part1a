@@ -64,8 +64,24 @@ blogRouters.post('/',async (req,res,next)=>{
 })
 
 blogRouters.delete('/:id', async (req,res,next)=>{
-    const response= await blogDatabase.findByIdAndRemove(req.params.id)
-        res.status(204).end()
+    const token=getToken(req)
+    console.log("token",token);
+    const decodeToken=jwt.verify(token,process.env.SECRET)
+    console.log(decodeToken);
+    console.log(decodeToken.username);
+    console.log(req.params.id);
+    const findUser=await blogDatabase.findById(req.params.id)
+    if(!findUser){
+        return res.status(400).send("<h1>Data deleted</h1>")
+    }
+    if(decodeToken.id === findUser.user.toString()){
+        const response= await blogDatabase.findByIdAndRemove(req.params.id)
+        return res.status(204).end()
+        
+    }
+    return res.status(400).json({error:"You dont have access"})
+    //console.log("this user exist",findUser);
+    //const findUser
     
 })
 blogRouters.put('/:id', async (req,res)=>{
