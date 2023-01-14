@@ -42,10 +42,20 @@ POST  http://localhost:4000/users
 Content-Type: application/json
 
 {
-    "username":"Ai",
+    "username":"Adekid",
     "name":"Adebayo Aisha Adeyinka",
-    "password":"Ai"
+    "password":"Adekid@018"
 }
 
 ###
 GET http://localhost:4000/users
+
+
+###
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+    "username":"Adekid",
+    "password":"Adekid@01"
+}
