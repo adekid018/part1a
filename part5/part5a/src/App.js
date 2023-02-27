@@ -7,6 +7,7 @@ import blogServer from './severs/blogSever'
 import LoginForm from './components/loginForm';
 import loginSever from './severs/loginSever';
 import blogSever from './severs/blogSever';
+import Notification from './components/notification';
 
 function App() {
   const [author, setAuthorName]=useState("")
@@ -17,6 +18,8 @@ function App() {
   const [user,setUser]=useState(null)
   const [username,setUsername]=useState("")
   const [password,setPassword]=useState("")
+  const [notificationSuccess,setNotificationSuccess]=useState(null)
+  const [notificationUnsuccessful,setNotificationUnsuccessful]=useState(null)
   //event handlers
 const handleAuthorName=(e)=>{
   setAuthorName(e.target.value)
@@ -42,8 +45,25 @@ const submitBlog=(e)=>{
   }
   blogServer
   .addBlog(newBlog)
-  .then(response=>setBlog(blog.concat(response)))
-  .catch(error=>console.log(error))
+  .then(response=>{
+    //succesfull message if a user upload a good blog
+    setNotificationSuccess(`Blog successully uploaded titled ${newBlog.title}`)
+    setTimeout(()=>{
+      setNotificationSuccess(null)
+    },5000)
+    return setBlog(blog.concat(response))
+  })
+  .catch(error=>{
+    console.log(error)
+    //set error notification message if a user try to add an invalid blog
+    setNotificationUnsuccessful(error.response.data.error)
+    setTimeout(() => {
+      setNotificationUnsuccessful(null)
+    }, 5000)  
+  })
+  setAuthorName("")
+  setTitle("")
+  setUrl("")
 //console.log("working")
 }
 
@@ -63,19 +83,25 @@ const loginUser= async (e)=>{
     window.localStorage.setItem(
       'loggedIn', JSON.stringify(user)
     )
+    //successful message if user name or password is correct
+    setNotificationSuccess(`Successfully logged in ${user.name}`)
+    setTimeout(()=>{
+      setNotificationSuccess(null)
+    },5000)
     //set the token gotten from jwt and passed as an argument
     blogServer.setToken(user.token)
     setUser(user)
-    //setUsername('')
-    //setPassword('')
+    setUsername('')
+    setPassword('')
     console.log(user)
+    
   }
 catch (exception) {
-  /*setErrorMessage('Wrong credentials')
+  //Error message if user name or password is incorrect
+  setNotificationUnsuccessful('Wrong username or password')
   setTimeout(() => {
-    setErrorMessage(null)
-  }, 5000)*/
-  console.log("error login")
+    setNotificationUnsuccessful(null)
+  }, 5000)
 }
 
 }
@@ -123,6 +149,7 @@ console.log(user)
       noVote={noVote}
       submit={submitBlog}
     />}
+    <Notification sucesssNotification={notificationSuccess} unSucessfulNotification={notificationUnsuccessful}/>
       {/*if user is null it will display the login form as declared in the login 
       component form and if false display the list of blogs*/}
       {user === null ? 
