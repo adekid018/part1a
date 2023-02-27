@@ -1,6 +1,7 @@
 import React from "react"
 const BlogInput=(props)=>{
     return(<div>
+        <h1>Create New Blog</h1>
         <form onSubmit={props.blogSubmission}>
             <label>Author</label>
             <input type={"text"}  value={props.authorName} onChange={props.author} placeholder="Author Name"/>

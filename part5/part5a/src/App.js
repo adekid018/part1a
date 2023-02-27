@@ -115,6 +115,14 @@ const logout=()=>{
 console.log(user)
   return (
     <div className="App">
+      {/*if user is not null populate the create new blog form */}
+      {user !== null && <BlogInput authorName={author} author={handleAuthorName}
+      titleName={title} title={handleTitleName}
+      urlName={url} url={handleUrl}
+      vote={castVote}
+      noVote={noVote}
+      submit={submitBlog}
+    />}
       {/*if user is null it will display the login form as declared in the login 
       component form and if false display the list of blogs*/}
       {user === null ? 
@@ -126,14 +134,7 @@ console.log(user)
        blog={blog} loggedInUser={user.name} logoutUser={logout}
         />}
        
-      {/*<h1>BLOG</h1>
-      <BlogInput authorName={author} author={handleAuthorName}
-      titleName={title} title={handleTitleName}
-      urlName={url} url={handleUrl}
-      vote={castVote}
-      noVote={noVote}
-      submit={submitBlog}
-    />*/}
+      
     </div>
   );
 }
