@@ -33,6 +33,6 @@ app.use(middleWares.errorHandler)
 app.use(middleWares.unknownEndpoint)
 loggers.info(`Server running on port ${config.PORT}`)
 server.listen(config.PORT,()=>{
-    loggers.info("Its working on port 4000");
+    loggers.info("Its working on port",config.PORT);
 })
 module.exports=app

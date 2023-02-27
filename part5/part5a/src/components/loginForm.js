@@ -8,12 +8,12 @@ const LoginForm=(props)=>{
         return(
         <div>
             <h2>Log in to application</h2>
-            <form onSubmit={props.loginUser}>
+            <form onSubmit={props.loginForm}>
                 <label>Username</label>
                 <input type={"text"} onChange={props.setUserName} value={props.userName}/>
                 <label>Password</label>
                 <input type={"password"} onChange={props.setPassword} value={props.password}/>
-                <button type="submit">Login</button>
+                <button type="submit">Log</button>
             </form>
         </div>    
         )
@@ -21,7 +21,7 @@ const LoginForm=(props)=>{
     return(
     <div>
       <h2>blogs</h2>
-      <p>{props.loggedInUser} logged in</p>
+      <p>{props.loggedInUser} logged in <button onClick={props.logoutUser}>Loggout</button></p>
       {props.blog.map((value)=>
       <Blog key={value.id} author={value.author} title={value.title}
       url={value.url} vote={value.vote}
@@ -31,4 +31,4 @@ const LoginForm=(props)=>{
     </div>
     )/**/
 }
-export default {LoginForm}
+export default LoginForm

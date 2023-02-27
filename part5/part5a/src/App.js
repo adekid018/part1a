@@ -6,7 +6,6 @@ import Blog from './components/blogs';
 import blogServer from './severs/blogSever'
 import LoginForm from './components/loginForm';
 import loginSever from './severs/loginSever';
-import blogSever from './severs/blogSever';
 
 function App() {
   const [author, setAuthorName]=useState("")
@@ -46,33 +45,33 @@ const submitBlog=(e)=>{
   .catch(error=>console.log(error))
 //console.log("working")
 }
-const loginUser=(e)=>{
+
+
+const loginUser= async (e)=>{
   e.preventDefault();
   const login={
     username:username,
     password:password
   }
+  console.log("working")
+  try {
+    const user = await loginSever.login({
+      username, password,
+    })  
+    setUser(user)
+    //setUsername('')
+    //setPassword('')
+    console.log(user)
+  }
   
-  loginSever
-  .login(login)
-  .then(response=>{
-    setUser(response)
-    console.log(response)
-  })
-  //the token generated was used here so that we can add a blog 
-  blogSever.setToken(user.token)
-  .catch(error=>{
-    console.log(error)
-    //setErrorMessage("Wrong Credentials")
-    console.log("wrong")
-    setTimeout(()=>{
-      //setErrorMessage(null)
-    },5000)
-  })
-  setUsername('')
-  setPassword('')
-  console.log(login)
+  
+catch (exception) {
+  
+  console.log("error login")
 }
+
+}
+
 const deleteBlog=(id)=>{
   console.log("working");
   blogServer
@@ -84,23 +83,24 @@ useEffect(()=>{
   blogServer
   .getBlog()
   .then(response=>setBlog(response))
-},[])
-
-console.log(blog);
+},[])/*
+const logout=()=>{
+  console.log("working")
+  window.localStorage.removeItem(loggedInUser)
+  //setUser(null)
+}*/
   return (
     <div className="App">
       {/*if user is null it will display the login form as declared in the login 
-      component form and if false display the list of blogs
-      */}
-      {user === null ? <LoginForm user={user} userName={username} setUserName={({target})=>setUsername(target.value)} password={password}
-       setPassword={({target})=>setPassword(target.value)} loginUser={loginUser}
-       blog={blog} 
-       />
+      component form and if false display the list of blogs*/}
+      {user === null ? 
+      <LoginForm user={user} userName={username} setUserName={({target})=>setUsername(target.value)} password={password}
+       setPassword={({target})=>setPassword(target.value)} loginForm={loginUser}/> 
        :
        <LoginForm user={user} userName={username} setUserName={({target})=>setUsername(target.value)} password={password}
        setPassword={({target})=>setPassword(target.value)} loginUser={loginUser}
        blog={blog} loggedInUser={user.name}
-       />}
+        />}
        
       {/*<h1>BLOG</h1>
       <BlogInput authorName={author} author={handleAuthorName}

@@ -31,9 +31,9 @@ POST  http://localhost:4000/users
 Content-Type: application/json
 
 {
-    "username":"Aisha",
-    "name":"Adebayo Aisha Adeyinka",
-    "password":"Aisha"
+    "username":"Adeola",
+    "name":"Adeola",
+    "password":"Adeola"
 }
 
 
@@ -42,23 +42,23 @@ POST  http://localhost:4000/users
 Content-Type: application/json
 
 {
-    "username":"Adekid",
-    "name":"Adebayo Aisha Adeyinka",
-    "password":"Adekid@018"
+    "username":"iyanda",
+    "name":"iyanda",
+    "password":"iyanda"
 }
 
 ###
 GET http://localhost:4000/users
 
 ###
-DELETE http://localhost:4000/users/63c2e511bbeeba3716b9aba5
+DELETE http://localhost:4000/users/63c2dbf2dfc0d3075f5bee70
 ###
 POST http://localhost:4000/login
 Content-Type: application/json
 
 {
-    "username":"Aisha",
-    "password":"Aisha"
+    "username":"iyanda",
+    "password":"iyanda"
 }
 
 //sending note based on login details
@@ -73,3 +73,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFpc
     "url":"www.fullstackopen.com",
     "vote":"100"
 }
+###
+GET http://localhost:4000/users
