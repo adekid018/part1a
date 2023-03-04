@@ -17,7 +17,6 @@ function App() {
   const [blog, setBlog]=useState([])
   const [user,setUser]=useState(null)
   const [username,setUsername]=useState("")
-  const [newBlogForm,setNewBlogForm]=useState(false)
   const [password,setPassword]=useState("")
   const [notificationSuccess,setNotificationSuccess]=useState(null)
   const [notificationUnsuccessful,setNotificationUnsuccessful]=useState(null)
@@ -66,7 +65,6 @@ const submitBlog=(e)=>{
   setTitle("")
   setUrl("")
   //make the add new blog form not visible
-  setNewBlogForm(!newBlogForm)
 //console.log("working")
 }
 
@@ -152,9 +150,6 @@ console.log(user)
       vote={castVote}
       noVote={noVote}
       submit={submitBlog}
-      blogVisibility={newBlogForm}
-      createBlogButton={()=>setNewBlogForm(!newBlogForm)}
-      cancelBlog={()=>setNewBlogForm(!newBlogForm)}
     />}
     <Notification sucesssNotification={notificationSuccess} unSucessfulNotification={notificationUnsuccessful}/>
       {/*if user is null it will display the login form as declared in the login 

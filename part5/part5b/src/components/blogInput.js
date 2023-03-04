@@ -1,12 +1,20 @@
 import React from "react"
+import { useState } from "react"
 const BlogInput=(props)=>{
+    /*created a new state for the blog form in its own component */
+    const [newBlogForm,setNewBlogForm]=useState(false)
+
     {/*created a style and set the value based on props which will be determined by the useState*/}
-    const showCreateButton={display:props.blogVisibility?"none":""}
-    const showForm={display:props.blogVisibility?"":"none"}
+    const showCreateButton={display:newBlogForm?"none":""}
+    const showForm={display:newBlogForm?"":"none"}
+    //a function use to change visibility state
+    const toggleBlog=()=>{
+        setNewBlogForm(!newBlogForm)
+    }
     return(
         <div>
             <div style={showCreateButton}>
-                <button onClick={props.createBlogButton}>Create new blog</button>
+                <button onClick={toggleBlog}>Create new blog</button>
             </div>
             <div style={showForm}>
             <h1>Create New Blog</h1>
@@ -21,7 +29,7 @@ const BlogInput=(props)=>{
                 <p>{props.noVote}</p>
                 <button type="submit"onClick={props.submit}>Submit</button>
             </form>
-                <button onClick={props.cancelBlog}>Cancel</button>
+                <button onClick={toggleBlog}>Cancel</button>
             </div>
         </div>
     )
