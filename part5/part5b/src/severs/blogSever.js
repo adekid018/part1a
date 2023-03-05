@@ -19,7 +19,10 @@ const addBlog=(data)=>{
     return request.then(response=>response.data)
 }
 const deleteBlogs=(id)=>{
-    const request=axios.delete(`${url}/${id}`)
+    const config = {
+        headers: { Authorization: token },
+    }
+    const request=axios.delete(`${url}/${id}`,config)
     return request.then(response=>response.data)
 }
 export default {getBlog,addBlog,deleteBlogs,setToken}

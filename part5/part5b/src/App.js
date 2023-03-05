@@ -137,13 +137,20 @@ catch (exception) {
 }
 
 }
-console.log(blog)
+//activated the delete button
 const deleteBlog=(id)=>{
+  const findBlog=blog.find(n=>n.id===id)
   console.log("working");
+  //created a prompt method to delete the blog
+if (window.confirm(`Remove blog ${findBlog.title} by ${findBlog.author}`)){
   blogServer
   .deleteBlogs(id)
   .then(response=>response.data)
   setBlog(blog.filter(value=>value.id!==id))
+}
+  else{
+    return ""
+  }
 }
 /*A function used to remove a user stored user in the local storage
 and setting the user to null so that the login form can come up
@@ -180,7 +187,7 @@ console.log(user)
        blog.map((value,i)=>
       <Blog key={value.id} author={value.author} title={value.title}
       url={value.url} vote={value.vote} created={value.user.name}
-      /*delete={()=>deleteBlog(value.id)}*/
+      delete={()=>deleteBlog(value.id)}
       />
       )}
       
