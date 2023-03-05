@@ -8,6 +8,7 @@ import LoginForm from './components/loginForm';
 import loginSever from './severs/loginSever';
 import blogSever from './severs/blogSever';
 import Notification from './components/notification';
+import axios from 'axios';
 
 function App() {
   const [author, setAuthorName]=useState("")
@@ -34,6 +35,19 @@ const castVote=(e)=>{
   e.preventDefault()
   setVote(noVote+1)
 }
+/*This method will run once the browser loads it will check if
+there is a user with the key  "loggedIn" if yes it will load the blog
+else it will not instead it will load the form
+*/
+useEffect(()=>{
+  const loggedInUser=window.localStorage.getItem("loggedIn")
+  console.log(loggedInUser)
+  if(loggedInUser){
+    const user= JSON.parse(loggedInUser)
+    setUser(user)
+    blogSever.setToken(user.token)
+  }
+},[])
 
 const submitBlog=(e)=>{
   e.preventDefault();
@@ -41,7 +55,8 @@ const submitBlog=(e)=>{
     author:author,
     title:title,
     url:url,
-    vote:noVote
+    vote:noVote,
+    createdBy:user
   }
   blogServer
   .addBlog(newBlog)
@@ -68,7 +83,23 @@ const submitBlog=(e)=>{
 //console.log("working")
 }
 
-
+useEffect(()=>{
+  blogServer
+  .getBlog()
+  .then(response=>setBlog(response))
+},[])
+//created a function to sort the blog using the sort method
+const sortBlog=blog.sort((v1,v2)=>{
+  const authorA=parseInt(v1.vote)
+  const authorB=parseInt(v2.vote)
+  if (authorA < authorB) {
+    return 1;
+  }
+  if (authorA > authorB) {
+    return -1;
+  }
+  return 0
+})
 const loginUser= async (e)=>{
   e.preventDefault();
   const login={
@@ -106,7 +137,7 @@ catch (exception) {
 }
 
 }
-
+console.log(blog)
 const deleteBlog=(id)=>{
   console.log("working");
   blogServer
@@ -114,23 +145,6 @@ const deleteBlog=(id)=>{
   .then(response=>response.data)
   setBlog(blog.filter(value=>value.id!==id))
 }
-useEffect(()=>{
-  blogServer
-  .getBlog()
-  .then(response=>setBlog(response))
-},[])
-/*This method will run once the browser loads it will check if
-there is a user with the key  "loggedIn" if yes it will load the blog
-else it will not instead it will load the form
-*/
-useEffect(()=>{
-  const loggedInUser=window.localStorage.getItem("loggedIn")
-  if(loggedInUser){
-    const user= JSON.parse(loggedInUser)
-    setUser(user)
-    blogSever.setToken(user.token)
-  }
-},[])
 /*A function used to remove a user stored user in the local storage
 and setting the user to null so that the login form can come up
 */
@@ -139,6 +153,7 @@ const logout=()=>{
   window.localStorage.removeItem("loggedIn")
   setUser(null)
 }
+
 console.log(user)
   return (
     <div className="App">
@@ -160,12 +175,16 @@ console.log(user)
        :
        <LoginForm user={user} userName={username} setUserName={({target})=>setUsername(target.value)} password={password}
        setPassword={({target})=>setPassword(target.value)} loginUser={loginUser}
-       blog={blog} loggedInUser={user.name} logoutUser={logout}
-        />}
-       
+       loggedInUser={user.name} logoutUser={logout} />}
+       {user && 
+       blog.map((value,i)=>
+      <Blog key={value.id} author={value.author} title={value.title}
+      url={value.url} vote={value.vote} created={value.user.name}
+      /*delete={()=>deleteBlog(value.id)}*/
+      />
+      )}
       
     </div>
   );
 }
-
 export default App;

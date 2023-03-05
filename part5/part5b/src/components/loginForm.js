@@ -22,12 +22,6 @@ const LoginForm=(props)=>{
     <div>
       <h2>blogs</h2>
       <p>{props.loggedInUser} logged in <button onClick={props.logoutUser}>Logout</button></p>
-      {props.blog.map((value)=>
-      <Blog key={value.id} author={value.author} title={value.title}
-      url={value.url} vote={value.vote}
-      /*delete={()=>deleteBlog(value.id)}*/
-      />
-      )}
     </div>
     )
 }
