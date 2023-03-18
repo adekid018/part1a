@@ -28,5 +28,6 @@ const Blog=(props)=>{
             </div>
     </div>
     )
+
 }
 export default Blog

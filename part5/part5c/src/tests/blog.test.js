@@ -4,7 +4,6 @@ import React from 'react'
     import {render,screen} from '@testing-library/react'
     import Blog from '../components/blogs'
     import BlogInput from '../components/blogInput'
-    
     //created a test method
     test('render blog title',()=>{
         //specified the  content
@@ -66,3 +65,23 @@ import React from 'react'
             expect(div).toBeDefined()
         })
       })
+      test('<NoteForm /> updates parent state and calls onSubmit', async () => {
+        //defined a mock function
+        const createNote = jest.fn()
+        //A session is started to interact with the rendered component
+        const user = userEvent.setup()
+        
+        render(<BlogInput blogSubmission={createNote}/>)
+        const allTextbox =screen.getByPlaceholderText('Author Name')
+        // get the element by placeholder
+        const input =screen.getByPlaceholderText('Title')
+        const sendButton = screen.getByText('Submit')
+        //typed into the input field
+        await user.type(allTextbox, 'Abdulazeez')
+        await user.type(input, 'testing a form...')
+        await user.click(sendButton)
+        //expected result
+        expect(allTextbox.value).toContain("Abdulazeez")
+        expect(input.value).toContain('te')
+      })
+      
