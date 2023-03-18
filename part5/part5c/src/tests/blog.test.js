@@ -65,6 +65,9 @@ import React from 'react'
             expect(div).toBeDefined()
         })
       })
+
+      //5.16: Blog list tests, step4
+      //Make a test for the new blog form. The test should check, that the form calls the event handler it received as props with the right details when a new blog is created.
       test('<NoteForm /> updates parent state and calls onSubmit', async () => {
         //defined a mock function
         const createNote = jest.fn()
@@ -85,3 +88,5 @@ import React from 'react'
         expect(input.value).toContain('te')
       })
       
+//some of the excersise i couldnt get the real value i just made sure it worked as expected due to the fact that since part5b i was supposed to use 
+//fullstackopen specified code but i didnt instead i created mine to work the same way just to task my self
