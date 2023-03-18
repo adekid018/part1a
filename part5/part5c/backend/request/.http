@@ -1,0 +1,77 @@
+GET http://localhost:4000/blogs
+
+###
+DELETE http://localhost:4000/blogs/63c2ea86f19812449d1bedab
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkZWtpZCIsImlkIjoiNjNjMmRiZjJkZmMwZDMwNzVmNWJlZTcwIiwiaWF0IjoxNjczNzI3NzA3LCJleHAiOjE2NzM3MzEzMDd9.KOrpWY0Xo8EfH_J1YIivPAU4DNYDUNIk2yAd4eKL3-E
+###
+POST http://localhost:4000/blogs/
+Content-Type: application/json
+
+{
+    "author":"adekid",
+    "title":"How to become rice2",
+    "url":"kk",
+    "vote":"5",
+    "userId":"63b92ddd301a9e2e0d2d9bf4"
+}
+
+###
+PUT http://localhost:4000/blogs/640438ee2831a4d650512cf8
+Content-Type: application/json
+
+{
+    "author":"ae",
+    "title":"How to become rice2",
+    "url":"kk",
+    "vote":"5"
+}
+
+###
+POST  http://localhost:4000/users
+Content-Type: application/json
+
+{
+    "username":"Adeola",
+    "name":"Adeola",
+    "password":"Adeola"
+}
+
+
+###
+POST  http://localhost:4000/users
+Content-Type: application/json
+
+{
+    "username":"iyanda",
+    "name":"iyanda",
+    "password":"iyanda"
+}
+
+###
+GET http://localhost:4000/users
+
+###
+DELETE http://localhost:4000/users/63c2dbf2dfc0d3075f5bee70
+###
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+    "username":"iyanda",
+    "password":"iyanda"
+}
+
+//sending note based on login details
+###
+POST  http://localhost:4000/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFpc2hhIiwiaWQiOiI2M2I5NGYzNTA4YWRlOTcyYWI1NzIzNDQiLCJpYXQiOjE2NzM3Mjc2NDQsImV4cCI6MTY3MzczMTI0NH0.Y_DUoQ2CUCmkBDo7ZsX3Y-f5KVoaaS4SyGDR0FO18Cs
+
+{
+    "author":"Adekidnew",
+    "title":"FullStack Open",
+    "url":"www.fullstackopen.com",
+    "vote":"100"
+}
+###
+GET http://localhost:4000/users
