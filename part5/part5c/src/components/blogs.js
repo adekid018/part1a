@@ -17,10 +17,10 @@ const Blog=(props)=>{
     const onClickValue=contentVisibility?"hide":"show"
     return(
     <div style={blogsStyle}>
-            <p>{props.title} <button onClick={showBlogContent}>{onClickValue}</button></p>
-            <div style={showBlogContentStyle}>
+            <p>{props.title} <button className="showBlogContentButton" onClick={showBlogContent}>{onClickValue}</button></p>
+            <div style={showBlogContentStyle} className="content">
                 <a href={`https://${props.url}`}>{props.url}</a>
-                <p>Likes {props.vote}</p>
+                <p className="likes">Likes {props.vote}</p>
                 <p>{props.author}</p>
                 {/**/}
                 <p>Created by {props.created}</p>
